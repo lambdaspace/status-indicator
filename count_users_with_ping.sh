@@ -9,7 +9,7 @@
 #
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-logDirectory="/home/alex/Desktop/test/logs" # The directory where the error logs will be outputted
+logDirectory="/var/log/count_users" # The directory where the error logs will be outputted
 outputDirectory="/var/www/html" # Change this directory in order to change where the script outputs the files
 fileName="hackers.txt" # The name of the outputted file
 emptyIpsBeforeQuiting=6 # How many IPs in a row can be unassigned before stopping the scan.
@@ -26,17 +26,21 @@ function find_limit_and_fourth_octave(){
   fourthOctave=$(($limit-$possibleIps-1))
 }
 
+# Create error log
 function log(){
     if [[ ! -d $logDirectory ]]; then
       mkdir -p $logDirectory
     fi
     now=$(date +'%d/%m/%Y %T')
-    echo $now "call script number:" $previousScriptNumber "this script results:" $actualDevices >> $logDirectory/logs
+    echo $now "call script number:" $previousScriptNumber "this script results:" $actualDevices >> $logDirectory/error.logs
 }
 
-function help(){
-  # TO DO
-  echo "Sorry no help option yet :( "
+function usage(){
+  echo "Possible arguments:
+          -d or --directory         define output directory
+          -fn or --filename         define filename
+          -a or --active            define the number of always active devices on the network (routers etc.)
+          -fc or --fallback_call    define the number of connected devices if you already have a number and you want to check it to be sure"
 }
 
 # Parse parameters
@@ -61,7 +65,7 @@ while [[ $# > 0 ]]
         shift
       ;;
       -h|--help)
-        help
+        usage
         exit 1
       ;;
     esac
