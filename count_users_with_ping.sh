@@ -13,7 +13,7 @@ logDirectory="/home/alex/Desktop/test/logs" # The directory where the error logs
 outputDirectory="/var/www/html" # Change this directory in order to change where the script outputs the files
 fileName="hackers.txt" # The name of the outputted file
 emptyIpsBeforeQuiting=6 # How many IPs in a row can be unassigned before stopping the scan.
-activeDevices=0 # Initialize number of hackers.
+activeDevices=0 # Initialize number of active devices.
 alwaysActiveDevices=2 # Number of always active devices.
 
 # Find the range that the script should scan based on the number of mask bits and the host's ip
@@ -36,6 +36,7 @@ function log(){
 
 function help(){
   # TO DO
+  echo "Sorry no help option yet :( "
 }
 
 # Parse parameters
