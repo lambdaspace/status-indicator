@@ -12,7 +12,7 @@
 logDirectory="/home/alex/Desktop/test/logs" # The directory where the error logs will be outputted
 outputDirectory="/var/www/html" # Change this directory in order to change where the script outputs the files
 fileName="hackers.txt" # The name of the outputted file
-emptyIpsBeforeQuiting=6 # How many IPs in a row can be unasigned before stoping the scan.
+emptyIpsBeforeQuiting=6 # How many IPs in a row can be unassigned before stopping the scan.
 activeDevices=0 # Initialize number of hackers.
 alwaysActiveDevices=2 # Number of always active devices.
 
@@ -115,6 +115,7 @@ if [[ ! -d $outputDirectory ]]; then
   mkdir -p $outputDirectory
 fi
 actualDevices=$(($activeDevices-$alwaysActiveDevices))
+# Log an error if this script is used as a fall-back script and it counts a different amount of active devices
 if [[ -v previousScriptNumber && $actualDevices -ne $previousScriptNumber ]]; then
   log
 fi
