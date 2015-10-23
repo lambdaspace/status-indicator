@@ -9,9 +9,11 @@
 #
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function help(){
-  # TO DO
-  echo "Sorry no help option yet :( "
+function usage(){
+  echo "Possible arguments:
+          -d or --directory         define output directory
+          -fn or --filename         define filename
+          -a or --active            define the number of always active devices on the network (routers etc.)"
 }
 
 alwaysActiveDevices=2 # Number of always active devices.
@@ -36,7 +38,7 @@ while [[ $# > 0 ]]
         shift
       ;;
       -h|--help)
-        help
+        usage
         exit 1
       ;;
     esac
