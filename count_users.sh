@@ -60,5 +60,5 @@ actualDevices=$(($activeDevices-$alwaysActiveDevices)) # The actual number of ac
 if [[ $actualDevices -le 0 ]]; then
   $(pwd)/count_users_with_ping.sh -d $outputDirectory -fn $fileName -a $alwaysActiveDevices -fc $actualDevices
 else
-  echo $(($actualDevices)) > $outputDirectory/$fileName # Output the number of active users to hackers.txt
+  echo $actualDevices > $outputDirectory/$fileName # Output the number of active users to hackers.txt
 fi
