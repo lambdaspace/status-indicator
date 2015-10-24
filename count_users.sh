@@ -59,7 +59,7 @@ activeDevices=$(wc -l < $outputDirectory/mac_addresses.txt) # Count the active d
 actualDevices=$(($activeDevices-$alwaysActiveDevices)) # The actual number of active devices
 
 if [[ $actualDevices -le 0 ]]; then
-  $scriptDirectory/count_users_with_ping.sh -d $outputDirectory -fn $fileName -a $alwaysActiveDevices -fc $actualDevices
+  $($scriptDirectory/count_users_with_ping.sh -d $outputDirectory -fn $fileName -a $alwaysActiveDevices -fc $actualDevices)
 else
   echo $actualDevices > $outputDirectory/$fileName # Output the number of active users to hackers.txt
 fi

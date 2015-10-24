@@ -12,7 +12,7 @@
 logDirectory="/var/log/count_users" # The directory where the error logs will be outputted
 outputDirectory="/var/www/html" # Change this directory in order to change where the script outputs the files
 fileName="hackers.txt" # The name of the outputted file
-emptyIpsBeforeQuiting=6 # How many IPs in a row can be unassigned before stopping the scan.
+emptyIpsBeforeQuiting=18 # How many IPs in a row can be unassigned before stopping the scan.
 activeDevices=0 # Initialize number of active devices.
 alwaysActiveDevices=2 # Number of always active devices.
 
@@ -105,12 +105,14 @@ case $subnetwork in
 esac
 
 # Ping devices on the network and count the active ones.
-while [[ $fourthOctave -le $limit && $temp -le $emptyIpsBeforeQuiting ]] ;do
-  temp=$(($temp+1))
-  ping -c 1 $networksIp$fourthOctave &> /dev/null
-  if [[ $? -eq 0 ]]; then
+while [[ $fourthOctave -le $limit && $temp -le $emptyIpsBeforeQuiting ]]; do
+  ping -c 1 $networksIp$fourthOctave
+  result=$?
+  if [[ $result -eq 0 ]]; then
     activeDevices=$(($activeDevices+1))
     temp=0
+  else
+    temp=$(($temp+1))
   fi
   fourthOctave=$(($fourthOctave+1))
 done
