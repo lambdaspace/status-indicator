@@ -126,4 +126,4 @@ actualDevices=$(($activeDevices-$alwaysActiveDevices))
 if [[ -v previousScriptNumber && $actualDevices -ne $previousScriptNumber ]]; then
   log
 fi
-echo $actualDevices > $outputDirectory/$fileName # Output the number of active devices.
+echo "$actualDevices" > $outputDirectory/$fileName # Output the number of active devices.

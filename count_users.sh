@@ -19,7 +19,7 @@ function usage(){
 alwaysActiveDevices=2 # Number of always active devices.
 outputDirectory="/var/www/html" # Change this directory in order to change where the script outputs the files
 fileName="hackers.txt" # The name of the outputted file
-scriptDirectory=$(pwd)
+currentDirectory=$(pwd)
 
 # Parse parameters
 while [[ $# > 0 ]]
@@ -58,8 +58,9 @@ sudo nmap -sP $networksIp | grep ..:..:..:..:..:.. | awk '{print $3}' > $outputD
 activeDevices=$(wc -l < $outputDirectory/mac_addresses.txt) # Count the active devices
 actualDevices=$(($activeDevices-$alwaysActiveDevices)) # The actual number of active devices
 
+# If the device count returns 0 active devices check again just to be sure
 if [[ $actualDevices -le 0 ]]; then
-  $($scriptDirectory/count_users_with_ping.sh -d $outputDirectory -fn $fileName -a $alwaysActiveDevices -fc $actualDevices)
+  $currentDirectory/count_users_with_ping.sh -d $outputDirectory -fn $fileName -a $alwaysActiveDevices -fc $actualDevices
 else
-  echo $actualDevices > $outputDirectory/$fileName # Output the number of active users to hackers.txt
+  echo "$actualDevices" > $outputDirectory/$fileName # Output the number of active users to hackers.txt
 fi
