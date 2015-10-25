@@ -106,7 +106,7 @@ esac
 
 # Ping devices on the network and count the active ones.
 while [[ $fourthOctave -le $limit && $temp -le $emptyIpsBeforeQuiting ]]; do
-  ping -c 1 $networksIp$fourthOctave
+  ping -c 1 -t 1 $networksIp$fourthOctave &> /dev/null
   result=$?
   if [[ $result -eq 0 ]]; then
     activeDevices=$(($activeDevices+1))
