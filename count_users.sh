@@ -19,9 +19,9 @@ alwaysActiveDevices=2 # Number of always active devices.
 fileName="hackers.txt" # The name of the outputted file
 currentDirectory=$(pwd)
 
-#Read the numer of active devices that th
-if [[ -e $currentDirectory$fileName ]]; then
-  read previousActiveDevices < $currentDirectory/$fileName.txt
+#Read the numer of active devices that was counted last time
+if [[ -e $currentDirectory/$fileName ]]; then
+  read previousActiveDevices < $currentDirectory/$fileName
 else
   previousActiveDevices=999999999
 fi
